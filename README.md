@@ -85,6 +85,10 @@ Want to expand this game? Consider adding:
 - Progress saving with localStorage
 - More subjects (math, science, reading)
 
-## Credits
+## Live Demo
 
-Built with Claude Code to make AI education accessible and fun!
+Visit the live demo at: https://csheargm.github.io/kdsgame/
+
+## License
+
+MIT License - Feel free to use and modify for educational purposes.
