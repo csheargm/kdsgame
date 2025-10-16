@@ -69,13 +69,19 @@ async function initWebcam() {
     try {
         updateStatus("Requesting camera access...", false);
 
-        const stream = await navigator.mediaDevices.getUserMedia({
+        // Mobile-friendly camera constraints
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        const constraints = {
             video: {
-                width: { ideal: 640 },
-                height: { ideal: 480 },
+                width: { ideal: isMobile ? 480 : 640 },
+                height: { ideal: isMobile ? 480 : 480 },
                 facingMode: 'user'
-            }
-        });
+            },
+            audio: false
+        };
+
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
 
         video.srcObject = stream;
 
@@ -104,7 +110,12 @@ async function initWebcam() {
     }
 }
 
-function startCollecting(classIndex) {
+function startCollecting(classIndex, event) {
+    // Prevent default touch behavior
+    if (event) {
+        event.preventDefault();
+    }
+
     isCollecting = true;
     currentClass = classIndex;
     const btn = document.querySelectorAll('.btn-collect')[classIndex];
@@ -112,7 +123,12 @@ function startCollecting(classIndex) {
     collectLoop();
 }
 
-function stopCollecting() {
+function stopCollecting(event) {
+    // Prevent default touch behavior
+    if (event) {
+        event.preventDefault();
+    }
+
     isCollecting = false;
     const btns = document.querySelectorAll('.btn-collect');
     btns.forEach(btn => btn.classList.remove('collecting'));

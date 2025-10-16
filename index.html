@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>AI Academy - Learn AI & Ethics</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -54,19 +57,19 @@
 
                             <div class="data-collection">
                                 <div class="class-collector">
-                                    <button class="btn-collect" onmousedown="startCollecting(0)" onmouseup="stopCollecting()" ontouchstart="startCollecting(0)" ontouchend="stopCollecting()">
+                                    <button class="btn-collect" onmousedown="startCollecting(0, event)" onmouseup="stopCollecting(event)" ontouchstart="startCollecting(0, event)" ontouchend="stopCollecting(event)">
                                         👍 Thumbs Up
                                     </button>
                                     <span class="sample-count" id="samples-0">0 samples</span>
                                 </div>
                                 <div class="class-collector">
-                                    <button class="btn-collect" onmousedown="startCollecting(1)" onmouseup="stopCollecting()" ontouchstart="startCollecting(1)" ontouchend="stopCollecting()">
+                                    <button class="btn-collect" onmousedown="startCollecting(1, event)" onmouseup="stopCollecting(event)" ontouchstart="startCollecting(1, event)" ontouchend="stopCollecting(event)">
                                         ✌️ Peace Sign
                                     </button>
                                     <span class="sample-count" id="samples-1">0 samples</span>
                                 </div>
                                 <div class="class-collector">
-                                    <button class="btn-collect" onmousedown="startCollecting(2)" onmouseup="stopCollecting()" ontouchstart="startCollecting(2)" ontouchend="stopCollecting()">
+                                    <button class="btn-collect" onmousedown="startCollecting(2, event)" onmouseup="stopCollecting(event)" ontouchstart="startCollecting(2, event)" ontouchend="stopCollecting(event)">
                                         ✋ Open Hand
                                     </button>
                                     <span class="sample-count" id="samples-2">0 samples</span>
