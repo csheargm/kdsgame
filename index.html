@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Academy - Learn AI & Ethics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 AI Academy</h1>
+            <p class="subtitle">Train AI, Learn Ethics, Shape the Future!</p>
+            <div class="score-board">
+                <span>Level: <span id="level">1</span></span>
+                <span>Points: <span id="points">0</span></span>
+            </div>
+        </header>
+
+        <main id="game-screen">
+            <!-- Welcome Screen -->
+            <section id="welcome-screen" class="screen active">
+                <div class="welcome-content">
+                    <h2>Welcome to AI Academy!</h2>
+                    <p>Learn how Artificial Intelligence works by training your own models and solving real-world challenges.</p>
+                    <div class="learning-goals">
+                        <h3>What you'll learn:</h3>
+                        <ul>
+                            <li>✨ How machines learn from data</li>
+                            <li>🎯 Training and testing AI models</li>
+                            <li>⚖️ Ethics and fairness in AI</li>
+                            <li>🛡️ Privacy and responsible AI use</li>
+                        </ul>
+                    </div>
+                    <button class="btn-primary" onclick="startGame()">Start Learning!</button>
+                </div>
+            </section>
+
+            <!-- ML Training Screen -->
+            <section id="training-screen" class="screen">
+                <div class="training-content">
+                    <h2>🎨 Mission 1: Train Your Image Classifier</h2>
+                    <p class="mission-brief">Teach the AI to recognize different hand gestures using your webcam!</p>
+
+                    <div class="training-area">
+                        <div class="webcam-container">
+                            <video id="webcam" autoplay playsinline></video>
+                            <canvas id="canvas" style="display:none;"></canvas>
+                        </div>
+
+                        <div class="training-controls">
+                            <h3>Step 1: Collect Training Data</h3>
+                            <p class="instruction">Hold up different gestures and collect examples:</p>
+
+                            <div class="data-collection">
+                                <div class="class-collector">
+                                    <button class="btn-collect" onmousedown="startCollecting(0)" onmouseup="stopCollecting()" ontouchstart="startCollecting(0)" ontouchend="stopCollecting()">
+                                        👍 Thumbs Up
+                                    </button>
+                                    <span class="sample-count" id="samples-0">0 samples</span>
+                                </div>
+                                <div class="class-collector">
+                                    <button class="btn-collect" onmousedown="startCollecting(1)" onmouseup="stopCollecting()" ontouchstart="startCollecting(1)" ontouchend="stopCollecting()">
+                                        ✌️ Peace Sign
+                                    </button>
+                                    <span class="sample-count" id="samples-1">0 samples</span>
+                                </div>
+                                <div class="class-collector">
+                                    <button class="btn-collect" onmousedown="startCollecting(2)" onmouseup="stopCollecting()" ontouchstart="startCollecting(2)" ontouchend="stopCollecting()">
+                                        ✋ Open Hand
+                                    </button>
+                                    <span class="sample-count" id="samples-2">0 samples</span>
+                                </div>
+                            </div>
+
+                            <div class="training-actions">
+                                <button class="btn-primary" id="train-btn" onclick="trainModel()" disabled>
+                                    Train AI Model
+                                </button>
+                                <button class="btn-secondary" id="reset-btn" onclick="resetTraining()">
+                                    Reset Data
+                                </button>
+                            </div>
+
+                            <div class="training-status">
+                                <div id="status-message">Collect at least 10 samples for each gesture</div>
+                                <div id="training-progress" class="progress-bar" style="display:none;">
+                                    <div class="progress-fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="prediction-area" id="prediction-area" style="display:none;">
+                        <h3>Step 2: Test Your AI!</h3>
+                        <p>Show gestures to see what your AI predicts:</p>
+                        <div class="prediction-result">
+                            <div class="prediction-label" id="prediction">Waiting...</div>
+                            <div class="confidence-bars" id="confidence-bars"></div>
+                        </div>
+                    </div>
+
+                    <div class="learning-insight">
+                        <h4>💡 What's happening?</h4>
+                        <p id="insight-text">The AI is watching your examples and learning patterns. The more diverse examples you give, the better it learns!</p>
+                    </div>
+
+                    <button class="btn-next" id="next-mission-btn" onclick="goToEthicsChallenge()" style="display:none;">
+                        Next Mission: Ethics Challenge →
+                    </button>
+                </div>
+            </section>
+
+            <!-- Ethics Challenge Screen -->
+            <section id="ethics-screen" class="screen">
+                <div class="ethics-content">
+                    <h2>⚖️ Mission 2: AI Ethics Challenge</h2>
+                    <p class="mission-brief">Use your knowledge to solve real-world AI problems!</p>
+
+                    <div class="scenario-container" id="scenario-container">
+                        <!-- Scenarios will be loaded dynamically -->
+                    </div>
+
+                    <div class="scenario-feedback" id="scenario-feedback" style="display:none;">
+                        <h4 id="feedback-title"></h4>
+                        <p id="feedback-text"></p>
+                        <button class="btn-primary" onclick="nextScenario()">Next Scenario</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Completion Screen -->
+            <section id="completion-screen" class="screen">
+                <div class="completion-content">
+                    <h2>🎉 Congratulations, AI Expert!</h2>
+                    <div class="achievement-summary">
+                        <h3>You've learned:</h3>
+                        <ul>
+                            <li>✅ How to train machine learning models</li>
+                            <li>✅ The importance of diverse training data</li>
+                            <li>✅ How to identify bias in AI systems</li>
+                            <li>✅ Privacy and ethical considerations in AI</li>
+                            <li>✅ How to think critically about AI solutions</li>
+                        </ul>
+                    </div>
+                    <div class="final-score">
+                        <h3>Your Score: <span id="final-points">0</span> points</h3>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="location.reload()">Play Again</button>
+                        <button class="btn-secondary" onclick="showResources()">Learn More About AI</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Load ML libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.6/dist/teachablemachine-image.min.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

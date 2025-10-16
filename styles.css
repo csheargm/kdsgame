@@ -1,0 +1,495 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.score-board {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #764ba2;
+}
+
+.screen {
+    display: none;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: fadeIn 0.5s ease-in;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Welcome Screen */
+.welcome-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.welcome-content h2 {
+    color: #667eea;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.learning-goals {
+    background: #f7f7ff;
+    padding: 25px;
+    border-radius: 15px;
+    margin: 30px 0;
+    text-align: left;
+}
+
+.learning-goals h3 {
+    color: #764ba2;
+    margin-bottom: 15px;
+}
+
+.learning-goals ul {
+    list-style: none;
+}
+
+.learning-goals li {
+    padding: 10px 0;
+    font-size: 1.1em;
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary, .btn-collect, .btn-next {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin: 10px 5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #d0d0d0;
+}
+
+.btn-collect {
+    background: #f0f0ff;
+    color: #667eea;
+    width: 100%;
+    border: 2px solid #667eea;
+    font-size: 1.2em;
+}
+
+.btn-collect:hover {
+    background: #667eea;
+    color: white;
+}
+
+.btn-collect.collecting {
+    background: #4caf50;
+    color: white;
+    border-color: #4caf50;
+}
+
+.btn-next {
+    background: #4caf50;
+    color: white;
+}
+
+/* Training Screen */
+.training-content h2, .ethics-content h2 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.mission-brief {
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+.training-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.webcam-container {
+    background: #000;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 4/3;
+}
+
+#webcam {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.training-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.instruction {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.data-collection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.class-collector {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sample-count {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.training-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.training-actions button {
+    flex: 1;
+}
+
+.training-status {
+    background: #f7f7ff;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#status-message {
+    color: #667eea;
+    font-weight: bold;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* Prediction Area */
+.prediction-area {
+    background: #f7f7ff;
+    padding: 25px;
+    border-radius: 15px;
+    margin: 30px 0;
+}
+
+.prediction-result {
+    margin-top: 20px;
+}
+
+.prediction-label {
+    font-size: 2em;
+    font-weight: bold;
+    color: #667eea;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.confidence-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.confidence-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.confidence-bar-label {
+    min-width: 120px;
+    font-weight: bold;
+}
+
+.confidence-bar-fill {
+    flex: 1;
+    height: 30px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.confidence-bar-value {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    color: white;
+    font-weight: bold;
+}
+
+/* Learning Insight */
+.learning-insight {
+    background: #fff4e6;
+    padding: 20px;
+    border-radius: 15px;
+    border-left: 5px solid #ff9800;
+    margin: 20px 0;
+}
+
+.learning-insight h4 {
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+/* Ethics Screen */
+.scenario-container {
+    background: #f7f7ff;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.scenario {
+    margin-bottom: 30px;
+}
+
+.scenario h3 {
+    color: #764ba2;
+    margin-bottom: 15px;
+}
+
+.scenario-description {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+}
+
+.scenario-question {
+    font-weight: bold;
+    color: #667eea;
+    margin: 20px 0 15px 0;
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.choice-btn {
+    background: white;
+    border: 2px solid #667eea;
+    padding: 15px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.choice-btn:hover {
+    background: #f0f0ff;
+    transform: translateX(5px);
+}
+
+.choice-btn.selected {
+    background: #667eea;
+    color: white;
+}
+
+.scenario-feedback {
+    background: #f7f7ff;
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.scenario-feedback.correct {
+    background: #e8f5e9;
+    border-left: 5px solid #4caf50;
+}
+
+.scenario-feedback.partial {
+    background: #fff4e6;
+    border-left: 5px solid #ff9800;
+}
+
+#feedback-title {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+#feedback-text {
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+
+/* Completion Screen */
+.completion-content {
+    text-align: center;
+}
+
+.completion-content h2 {
+    color: #4caf50;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.achievement-summary {
+    background: #f7f7ff;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+    text-align: left;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.achievement-summary h3 {
+    color: #764ba2;
+    margin-bottom: 20px;
+}
+
+.achievement-summary ul {
+    list-style: none;
+}
+
+.achievement-summary li {
+    padding: 10px 0;
+    font-size: 1.1em;
+}
+
+.final-score {
+    font-size: 2em;
+    color: #667eea;
+    margin: 30px 0;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .training-area {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .score-board {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .screen {
+        padding: 20px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+}
