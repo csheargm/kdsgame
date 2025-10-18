@@ -26,16 +26,40 @@
                 <div class="welcome-content">
                     <h2>Welcome to Mommy's AI Academy!</h2>
                     <p>Learn how Artificial Intelligence works by training your own models and solving real-world challenges.</p>
-                    <div class="learning-goals">
-                        <h3>What you'll learn:</h3>
-                        <ul>
-                            <li>✨ How machines learn from data</li>
-                            <li>🎯 Training and testing AI models</li>
-                            <li>⚖️ Ethics and fairness in AI</li>
-                            <li>🛡️ Privacy and responsible AI use</li>
-                        </ul>
+
+                    <div class="modules-container">
+                        <!-- Module 1: Training and Testing AI Models -->
+                        <div class="module-card">
+                            <div class="module-icon">🤖</div>
+                            <h3>Training & Testing AI Models</h3>
+                            <p>Learn how to train your own AI and understand how machines learn from data.</p>
+                            <div class="module-topics">
+                                <ul>
+                                    <li>✨ How machines learn from data</li>
+                                    <li>🎯 Training and testing AI models</li>
+                                    <li>📊 Understanding model accuracy</li>
+                                    <li>🔍 Testing and validation</li>
+                                </ul>
+                            </div>
+                            <button class="btn-module" onclick="startGame()">Start Training</button>
+                        </div>
+
+                        <!-- Module 2: Ethics and Privacy -->
+                        <div class="module-card">
+                            <div class="module-icon">⚖️</div>
+                            <h3>Ethics & Privacy</h3>
+                            <p>Explore important questions about fairness, privacy, and responsible AI use.</p>
+                            <div class="module-topics">
+                                <ul>
+                                    <li>⚖️ Ethics and fairness in AI</li>
+                                    <li>🛡️ Privacy and data protection</li>
+                                    <li>🤔 Bias in AI systems</li>
+                                    <li>💡 Responsible AI use</li>
+                                </ul>
+                            </div>
+                            <button class="btn-module" onclick="goToEthicsChallenge()">Learn Ethics</button>
+                        </div>
                     </div>
-                    <button class="btn-primary" onclick="startGame()">Start Learning!</button>
                 </div>
             </section>
 
