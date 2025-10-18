@@ -76,14 +76,65 @@ python -m http.server 8000
 - **HTML5 Canvas** - For image processing
 - **WebRTC** - For webcam access
 
+## Roadmap - Upcoming Modules
+
+These new learning modules will help kids develop essential skills for the AI era. **Kids will vote on which ones to build first!**
+
+### Planned Modules
+
+**Mission 3: Prompt Engineering** 🎯
+- Learn to write effective prompts for AI tools
+- Understand how different prompts get different results
+- Practice iterative refinement and adding context
+- Real-world applications: homework help, creative writing, research
+
+**Mission 4: Statistics & AI Predictions** 📊
+- Visualize how AI makes predictions from data
+- Understand confidence levels and margins of error
+- Learn when to trust AI predictions vs. be skeptical
+- Interactive charts and probability exercises
+
+**Mission 5: Systems Thinking** 🔄
+- Explore interconnected systems and feedback loops
+- Understand cause-and-effect in complex AI systems
+- Analyze recommendation algorithms and their impacts
+- Develop holistic problem-solving skills
+
+**Mission 6: Learning How to Learn** 📚
+- Meta-learning: strategies for mastering new AI tools
+- Pattern recognition across different technologies
+- Growth mindset and embracing challenges
+- Guided discovery and exploration techniques
+
+**Mission 7: Conflict Resolution** 🤝
+- Practice empathy and active listening
+- Role-play mediation scenarios
+- Understand why AI can't replace human emotional intelligence
+- Real-world conflict scenarios for kids
+
+**Mission 8: Embracing New Tools & Technologies** 🚀
+- Overcome tech anxiety through gamified exploration
+- Learn trial-and-error in a safe environment
+- Celebrate mistakes as learning opportunities
+- Build adaptability for rapid technological change
+
+**Mission 9: Human Creativity & Authenticity** 🎨
+- Explore skills AI struggles to replicate
+- Develop unique voice and personal perspective
+- Creative storytelling and emotional expression
+- Compare AI-generated vs. human-created content
+
+### How to Contribute
+
+Want to help build these modules or suggest new ones? Check out our [GitHub Issues](https://github.com/csheargm/kdsgame/issues) to see what we're working on and share your ideas!
+
 ## Next Steps
 
-Want to expand this game? Consider adding:
+Additional ideas for expansion:
 - More ML models (object detection, pose estimation)
 - Additional ethics scenarios
 - Multiplayer challenges
 - Progress saving with localStorage
-- More subjects (math, science, reading)
 
 ## Live Demo
 
