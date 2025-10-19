@@ -185,11 +185,20 @@ function resetTraining() {
 }
 
 async function trainModel() {
+    // Immediate visual feedback
+    const trainBtn = document.getElementById('train-btn');
+    trainBtn.disabled = true;
+    trainBtn.textContent = 'Training...';
+    trainBtn.style.opacity = '0.7';
+
     updateStatus("Training your AI model... This may take a moment.", false);
     document.getElementById('training-progress').style.display = 'block';
 
+    // Start progress bar immediately at 5%
+    document.querySelector('.progress-fill').style.width = '5%';
+
     // Simulate training progress
-    let progress = 0;
+    let progress = 5;
     const progressInterval = setInterval(() => {
         progress += 5;
         document.querySelector('.progress-fill').style.width = progress + '%';
@@ -212,6 +221,9 @@ async function trainModel() {
 
         setTimeout(() => {
             modelTrained = true;
+            trainBtn.textContent = 'Training Complete!';
+            trainBtn.style.opacity = '1';
+
             updateStatus("Model trained successfully! Test it now by showing gestures.", false);
             updateInsight("Your AI has learned! It found patterns in your gestures. The neural network adjusted its 'weights' to recognize each gesture.");
             document.getElementById('prediction-area').style.display = 'block';
@@ -231,6 +243,9 @@ async function trainModel() {
     } catch (err) {
         console.error("Training error:", err);
         updateStatus("Training failed. Please try collecting more samples.", true);
+        trainBtn.textContent = 'Train AI Model';
+        trainBtn.disabled = false;
+        trainBtn.style.opacity = '1';
     }
 }
 
