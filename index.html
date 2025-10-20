@@ -12,11 +12,12 @@
 <body>
     <div class="container">
         <header>
-            <h1>🤖 AI Academy</h1>
-            <p class="subtitle">Train AI, Learn Ethics, Shape the Future!</p>
+            <div class="header-icon">🐿️</div>
+            <h1>🌳 AI Academy 🌳</h1>
+            <p class="subtitle">Gather Knowledge, Grow Wisdom, Nurture the Future! 🌱</p>
             <div class="score-board">
-                <span>Level: <span id="level">1</span></span>
-                <span>Points: <span id="points">0</span></span>
+                <span>🌰 Level: <span id="level">1</span></span>
+                <span>🍃 Acorns: <span id="points">0</span></span>
             </div>
         </header>
 
@@ -24,26 +25,67 @@
             <!-- Welcome Screen -->
             <section id="welcome-screen" class="screen active">
                 <div class="welcome-content">
-                    <h2>Welcome to AI Academy!</h2>
-                    <p>Learn how Artificial Intelligence works by training your own models and solving real-world challenges.</p>
+                    <h2>🐿️ Welcome to the Forest of AI! 🌳</h2>
+                    <p>Join our woodland friends as you discover how Artificial Intelligence works, train your own models, and solve nature's greatest challenges!</p>
+
                     <div class="learning-goals">
-                        <h3>What you'll learn:</h3>
+                        <h3>🌿 What you'll gather from the forest:</h3>
                         <ul>
-                            <li>✨ How machines learn from data</li>
-                            <li>🎯 Training and testing AI models</li>
-                            <li>⚖️ Ethics and fairness in AI</li>
-                            <li>🛡️ Privacy and responsible AI use</li>
+                            <li>🌱 How machines learn from data</li>
+                            <li>🌳 Training and testing AI models</li>
+                            <li>🍂 Ethics and fairness in AI</li>
+                            <li>🌲 Privacy and responsible AI use</li>
+                            <li>🌾 How to write effective AI prompts</li>
                         </ul>
                     </div>
-                    <button class="btn-primary" onclick="startGame()">Start Learning!</button>
+
+                    <div class="mission-menu">
+                        <h3>🌲 Choose Your Forest Path:</h3>
+
+                        <div class="mission-card" onclick="startGame()">
+                            <div class="mission-icon">🌱</div>
+                            <div class="mission-info">
+                                <h4>Mission 1: Plant Your Knowledge Tree</h4>
+                                <p>Use your webcam to train an image classifier with hand gestures</p>
+                            </div>
+                        </div>
+
+                        <div class="mission-card" onclick="startEthicsChallenge()">
+                            <div class="mission-icon">🍂</div>
+                            <div class="mission-info">
+                                <h4>Mission 2: Wisdom of the Woods</h4>
+                                <p>Solve real-world AI ethics scenarios and learn responsible AI</p>
+                            </div>
+                        </div>
+
+                        <div class="mission-card" onclick="startPromptEngineering()">
+                            <div class="mission-icon">🌾</div>
+                            <div class="mission-info">
+                                <h4>Mission 3: Harvest Words Wisely</h4>
+                                <p>Master the art of writing effective prompts for AI tools</p>
+                            </div>
+                        </div>
+
+                        <div class="mission-card resources-card" onclick="showResourcesPage()">
+                            <div class="mission-icon">📚</div>
+                            <div class="mission-info">
+                                <h4>The Grand Oak Library</h4>
+                                <p>Explore additional AI learning resources and next steps</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-start">
+                        <button class="btn-primary" onclick="startGame()">Start from Mission 1</button>
+                    </div>
                 </div>
             </section>
 
             <!-- ML Training Screen -->
             <section id="training-screen" class="screen">
                 <div class="training-content">
-                    <h2>🎨 Mission 1: Train Your Image Classifier</h2>
-                    <p class="mission-brief">Teach the AI to recognize different hand gestures using your webcam!</p>
+                    <h2>🌱 Mission 1: Plant Your Knowledge Tree</h2>
+                    <p class="mission-brief">Teach the AI squirrel to recognize different hand gestures using your webcam! Help them gather acorns of knowledge! 🌰</p>
 
                     <div class="training-area">
                         <div class="webcam-container">
@@ -117,8 +159,8 @@
             <!-- Ethics Challenge Screen -->
             <section id="ethics-screen" class="screen">
                 <div class="ethics-content">
-                    <h2>⚖️ Mission 2: AI Ethics Challenge</h2>
-                    <p class="mission-brief">Use your knowledge to solve real-world AI problems!</p>
+                    <h2>🍂 Mission 2: Wisdom of the Woods</h2>
+                    <p class="mission-brief">Gather ancient forest wisdom to solve real-world AI problems! The wise old oak needs your help! 🌳</p>
 
                     <div class="scenario-container" id="scenario-container">
                         <!-- Scenarios will be loaded dynamically -->
@@ -132,26 +174,76 @@
                 </div>
             </section>
 
+            <!-- Mission 3: Prompt Engineering Screen -->
+            <section id="prompt-engineering-screen" class="screen">
+                <div class="prompt-engineering-content">
+                    <h2>🌾 Mission 3: Harvest Words Wisely</h2>
+                    <p class="mission-brief">Learn to craft the perfect messages that get amazing results from AI! Plant seeds of clear communication! 🌻</p>
+
+                    <div class="progress-indicator">
+                        <span id="pe-progress">Level <span id="pe-current">1</span> of <span id="pe-total">5</span></span>
+                    </div>
+
+                    <div class="pe-level-container" id="pe-level-container">
+                        <!-- Level content will be loaded dynamically -->
+                    </div>
+
+                    <div class="pe-input-area" id="pe-input-area">
+                        <h3 id="pe-task">Write your prompt here:</h3>
+                        <textarea id="pe-prompt-input" placeholder="Type your prompt here..." rows="4"></textarea>
+
+                        <div class="pe-actions">
+                            <button class="btn-secondary" id="pe-hint-btn" onclick="showPromptHint()">Show Hint</button>
+                            <button class="btn-secondary" id="pe-example-btn" onclick="showPromptExample()">Show Example</button>
+                            <button class="btn-primary" id="pe-submit-btn" onclick="submitPrompt()">Submit Prompt</button>
+                        </div>
+
+                        <div class="hint-box" id="pe-hint-box" style="display:none;">
+                            <h4>💡 Hint:</h4>
+                            <p id="pe-hint-text"></p>
+                        </div>
+                    </div>
+
+                    <div class="pe-feedback" id="pe-feedback" style="display:none;">
+                        <h4 id="pe-feedback-title"></h4>
+                        <div class="pe-score-display">
+                            <div class="pe-score-value" id="pe-score-value">0</div>
+                            <div class="pe-score-label">Score</div>
+                        </div>
+                        <div id="pe-feedback-text"></div>
+                        <div class="pe-matched-criteria" id="pe-matched-criteria"></div>
+                        <button class="btn-primary" id="pe-next-btn" onclick="nextPromptLevel()">Next Level</button>
+                        <button class="btn-secondary" id="pe-retry-btn" onclick="retryPromptLevel()">Try Again</button>
+                    </div>
+
+                    <div class="learning-insight">
+                        <h4>💡 Key Concept</h4>
+                        <p id="pe-insight-text">Good prompts are specific, provide context, and tell the AI exactly what you need. Think of it like giving clear instructions to a friend!</p>
+                    </div>
+                </div>
+            </section>
+
             <!-- Completion Screen -->
             <section id="completion-screen" class="screen">
                 <div class="completion-content">
-                    <h2>🎉 Congratulations, AI Expert!</h2>
+                    <h2>🎉 Congratulations, Forest Guardian! 🐿️</h2>
                     <div class="achievement-summary">
-                        <h3>You've learned:</h3>
+                        <h3>🌳 Your Forest Wisdom:</h3>
                         <ul>
-                            <li>✅ How to train machine learning models</li>
-                            <li>✅ The importance of diverse training data</li>
-                            <li>✅ How to identify bias in AI systems</li>
-                            <li>✅ Privacy and ethical considerations in AI</li>
-                            <li>✅ How to think critically about AI solutions</li>
+                            <li>🌱 How to plant and grow machine learning models</li>
+                            <li>🌿 The importance of diverse training data in nature</li>
+                            <li>🍂 How to identify bias in AI systems</li>
+                            <li>🌲 Privacy and ethical considerations in the digital forest</li>
+                            <li>🌻 How to think critically about AI solutions</li>
+                            <li>🌾 How to harvest perfect prompts for AI tools</li>
                         </ul>
                     </div>
                     <div class="final-score">
-                        <h3>Your Score: <span id="final-points">0</span> points</h3>
+                        <h3>🌰 Your Acorn Collection: <span id="final-points">0</span> acorns</h3>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn-primary" onclick="location.reload()">Play Again</button>
-                        <button class="btn-secondary" onclick="showResources()">Learn More About AI</button>
+                        <button class="btn-primary" onclick="location.reload()">🔄 Return to the Forest</button>
+                        <button class="btn-secondary" onclick="showResources()">📚 Visit the Oak Library</button>
                     </div>
                 </div>
             </section>
@@ -161,6 +253,8 @@
     <!-- Load ML libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.6/dist/teachablemachine-image.min.js"></script>
+    <!-- Load Mission Modules -->
+    <script src="missions/mission3-prompt-engineering.js"></script>
     <script src="game.js"></script>
 </body>
 </html>

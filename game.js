@@ -6,6 +6,16 @@ let gameState = {
     currentScenario: 0
 };
 
+// Utility function to shuffle array (Fisher-Yates algorithm)
+function shuffleArray(array) {
+    const shuffled = [...array]; // Create a copy
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
 // ML Training State
 let classifier;
 let video;
@@ -41,6 +51,28 @@ document.addEventListener('DOMContentLoaded', async () => {
 function startGame() {
     showScreen('training-screen');
     initWebcam();
+}
+
+function startEthicsChallenge() {
+    gameState.currentScenario = 0;
+    // Shuffle scenarios each time mission starts
+    shuffledEthicsScenarios = shuffleArray(ethicsScenarios);
+    showScreen('ethics-screen');
+    loadScenario(0);
+}
+
+function startPromptEngineering() {
+    showScreen('prompt-engineering-screen');
+    Mission3.init();
+    currentPromptLevel = 0;
+    hintsUsed = 0;
+    exampleShown = false;
+    loadPromptLevel(0);
+}
+
+function showResourcesPage() {
+    showScreen('completion-screen');
+    document.getElementById('final-points').textContent = gameState.points;
 }
 
 function showScreen(screenId) {
@@ -408,6 +440,9 @@ function updateInsight(text) {
 
 // === ETHICS CHALLENGES ===
 
+// Store shuffled scenarios
+let shuffledEthicsScenarios = [];
+
 const ethicsScenarios = [
     {
         title: "Scenario 1: Facial Recognition at School",
@@ -543,30 +578,125 @@ const ethicsScenarios = [
                 feedback: "Great point! Transparency is important. People should know if art is AI-generated. This also raises interesting questions: Does it matter who/what creates art? How do we value creativity? Should AI art compete in the same spaces as human art?"
             }
         ]
+    },
+    {
+        title: "Scenario 6: AI Medical Diagnosis",
+        description: "A hospital develops an AI that can analyze medical scans and suggest diagnoses faster than human doctors. Early tests show it's 95% accurate, but doctors are concerned about the 5% of cases where it's wrong.",
+        question: "How should this AI be used in healthcare?",
+        choices: [
+            {
+                text: "Replace doctors with AI - it's more accurate most of the time",
+                points: 0,
+                feedback: "This is dangerous! That 5% error rate represents real people's lives. AI can make mistakes humans wouldn't, and patients deserve human judgment, empathy, and the ability to ask questions. Medical decisions are too important to fully automate."
+            },
+            {
+                text: "Use AI to assist doctors, but doctors make final decisions",
+                points: 100,
+                feedback: "Perfect! This is the best approach. AI can help doctors by flagging potential issues and processing data quickly, but human doctors should review findings, consider the whole patient, and make final decisions. This combines AI's speed with human expertise and accountability."
+            },
+            {
+                text: "Only use AI for simple cases, not complex ones",
+                points: 50,
+                feedback: "This is partially good thinking, but AI can actually be helpful for complex cases too - as long as doctors remain in charge. The key is using AI as a powerful tool to support doctors, not replace them, regardless of case complexity."
+            },
+            {
+                text: "Test the AI more until it's 100% accurate",
+                points: 25,
+                feedback: "While more testing is good, no AI (or human!) will ever be 100% accurate in medicine. The goal isn't perfection - it's using AI responsibly as a tool to help doctors make better decisions while maintaining human oversight and accountability."
+            }
+        ]
+    },
+    {
+        title: "Scenario 7: Smart Home Privacy",
+        description: "A company's smart home devices (speakers, cameras, thermostats) use AI to learn your habits and make your home more convenient. But to work well, they need to constantly collect data about when you're home, what you say, and what you do.",
+        question: "What should users consider about smart home AI?",
+        choices: [
+            {
+                text: "Convenience is worth it - I don't care if companies have my data",
+                points: 0,
+                feedback: "This data is more sensitive than you think! It reveals when you're away (security risk), your private conversations, health habits, and daily routines. Once collected, data can be hacked, sold, or used in ways you didn't expect. Your privacy has value!"
+            },
+            {
+                text: "Users should know exactly what data is collected and be able to delete it",
+                points: 100,
+                feedback: "Excellent! Transparency and control are key. Users deserve to know: what's collected, how it's used, who can access it, how long it's kept, and how to delete it. Good companies should offer local processing (data stays in your home) and clear privacy controls."
+            },
+            {
+                text: "Only use devices that don't have cameras or microphones",
+                points: 50,
+                feedback: "This reduces risk but might be too restrictive. The better solution is choosing companies with strong privacy practices, understanding what you're agreeing to, and using privacy settings to limit data collection while still getting benefits."
+            },
+            {
+                text: "The government should regulate what data these devices can collect",
+                points: 75,
+                feedback: "Good thinking! Regulations can help protect consumers. But users also need to take personal responsibility - read privacy policies, adjust settings, and choose companies that respect privacy. A combination of regulation and personal awareness works best."
+            }
+        ]
+    },
+    {
+        title: "Scenario 8: AI Chatbot Friend",
+        description: "A company creates an AI chatbot designed to be a friend for people who are lonely. The AI remembers conversations, offers emotional support, and is always available. Some people start preferring the AI to real human friends.",
+        question: "What are the potential benefits and concerns?",
+        choices: [
+            {
+                text: "This is great - AI friends are better because they're always nice and available",
+                points: 0,
+                feedback: "Real friendships involve challenges, disagreements, and growth - things AI can't provide. While AI can offer support, relying only on AI relationships means missing out on genuine human connection, empathy, and the personal growth that comes from navigating real relationships."
+            },
+            {
+                text: "AI chatbots can provide support, but shouldn't replace human relationships",
+                points: 100,
+                feedback: "Exactly right! AI companions can help people who are isolated or anxious practice social skills and receive some support. But they should be a bridge to human connection, not a replacement. Real relationships involve mutual growth, genuine empathy, and shared experiences that AI can't replicate."
+            },
+            {
+                text: "AI chatbots should be banned - they're manipulative and unhealthy",
+                points: 25,
+                feedback: "While there are concerns, AI tools can help some people (like those with social anxiety or in remote areas). Instead of banning, we should: require clear disclosure that it's AI, limit emotional manipulation, and design these tools to encourage real human connections."
+            },
+            {
+                text: "Users should be clearly told it's AI and warned about over-reliance",
+                points: 75,
+                feedback: "Great point! Transparency is crucial. Users should know they're talking to AI, understand its limitations, and be encouraged to maintain human relationships. Companies should avoid designs that deliberately create emotional dependence on AI."
+            }
+        ]
     }
 ];
 
 function goToEthicsChallenge() {
     predicting = false; // Stop prediction loop
     gameState.currentScenario = 0;
+    // Shuffle scenarios each time mission starts
+    shuffledEthicsScenarios = shuffleArray(ethicsScenarios);
     showScreen('ethics-screen');
     loadScenario(0);
     addPoints(50); // Bonus for completing training
 }
 
 function loadScenario(index) {
-    if (index >= ethicsScenarios.length) {
-        completeGame();
+    if (index >= shuffledEthicsScenarios.length) {
+        goToPromptEngineering();
         return;
     }
 
-    const scenario = ethicsScenarios[index];
+    const scenario = shuffledEthicsScenarios[index];
     const container = document.getElementById('scenario-container');
 
+    // Shuffle choices for variety, but remember original indices
+    const shuffledChoices = scenario.choices.map((choice, originalIndex) => ({
+        ...choice,
+        originalIndex
+    }));
+
+    // Shuffle the choices array
+    for (let i = shuffledChoices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledChoices[i], shuffledChoices[j]] = [shuffledChoices[j], shuffledChoices[i]];
+    }
+
     let choicesHTML = '';
-    scenario.choices.forEach((choice, i) => {
+    shuffledChoices.forEach((choice, displayIndex) => {
         choicesHTML += `
-            <button class="choice-btn" onclick="selectChoice(${i})">
+            <button class="choice-btn" onclick="selectChoice(${choice.originalIndex})">
                 ${choice.text}
             </button>
         `;
@@ -585,7 +715,7 @@ function loadScenario(index) {
 }
 
 function selectChoice(choiceIndex) {
-    const scenario = ethicsScenarios[gameState.currentScenario];
+    const scenario = shuffledEthicsScenarios[gameState.currentScenario];
     const choice = scenario.choices[choiceIndex];
 
     // Highlight selected choice
@@ -618,10 +748,171 @@ function nextScenario() {
     gameState.currentScenario++;
 
     if (gameState.currentScenario >= ethicsScenarios.length) {
-        completeGame();
+        goToPromptEngineering();
     } else {
         loadScenario(gameState.currentScenario);
     }
+}
+
+// === MISSION 3: PROMPT ENGINEERING ===
+
+let currentPromptLevel = 0;
+let hintsUsed = 0;
+let exampleShown = false;
+
+function goToPromptEngineering() {
+    showScreen('prompt-engineering-screen');
+    Mission3.init();
+    currentPromptLevel = 0;
+    hintsUsed = 0;
+    exampleShown = false;
+    loadPromptLevel(0);
+    addPoints(50); // Bonus for completing ethics challenges
+}
+
+function loadPromptLevel(levelIndex) {
+    const result = Mission3.loadLevel(levelIndex);
+
+    if (result.completed) {
+        completeGame();
+        return;
+    }
+
+    const level = result.level;
+    const progress = result.progress;
+
+    // Update progress indicator
+    document.getElementById('pe-current').textContent = progress.current;
+    document.getElementById('pe-total').textContent = progress.total;
+
+    // Update level container
+    const container = document.getElementById('pe-level-container');
+    container.innerHTML = `
+        <div class="pe-level">
+            <h3>${level.title}</h3>
+            <div class="pe-scenario">
+                <strong>Scenario:</strong> ${level.scenario}
+            </div>
+            <div class="pe-task-box">
+                <strong>Your Task:</strong> ${level.task}
+            </div>
+            <div class="pe-bad-example">
+                <strong>❌ Bad Prompt:</strong> "${level.badPrompt}"
+            </div>
+        </div>
+    `;
+
+    // Reset UI
+    document.getElementById('pe-prompt-input').value = '';
+    document.getElementById('pe-feedback').style.display = 'none';
+    document.getElementById('pe-hint-box').style.display = 'none';
+    document.getElementById('pe-input-area').style.display = 'block';
+    hintsUsed = 0;
+    exampleShown = false;
+
+    // Update insight
+    updatePromptInsight(levelIndex);
+}
+
+function updatePromptInsight(levelIndex) {
+    const insights = [
+        "Good prompts are specific and detailed. Instead of 'write a story,' try 'write a 200-word adventure story for 10-year-olds about a space explorer.'",
+        "Add context about what you know and where you're stuck. AI assistants are more helpful when they understand your situation.",
+        "Don't be afraid to refine your prompts! If the first result isn't perfect, adjust your prompt with more specific constraints.",
+        "Specify the format you want: bullet points, paragraphs, tables, or step-by-step instructions. This helps AI organize information better.",
+        "The best prompts combine everything: specificity, context, format requirements, and constraints. Think like you're briefing a helpful assistant!"
+    ];
+
+    document.getElementById('pe-insight-text').textContent = insights[levelIndex] || insights[0];
+}
+
+function showPromptHint() {
+    const hint = Mission3.getHint(currentPromptLevel, hintsUsed);
+    if (hint) {
+        document.getElementById('pe-hint-text').textContent = hint;
+        document.getElementById('pe-hint-box').style.display = 'block';
+        hintsUsed++;
+    } else {
+        document.getElementById('pe-hint-text').textContent = "No more hints available!";
+        document.getElementById('pe-hint-box').style.display = 'block';
+    }
+}
+
+function showPromptExample() {
+    const example = Mission3.showExample(currentPromptLevel);
+    exampleShown = true;
+
+    const container = document.getElementById('pe-level-container');
+    container.innerHTML += `
+        <div class="pe-example-box">
+            <h4>✅ Example Good Prompt:</h4>
+            <p>"${example.good}"</p>
+            <small>Now try writing your own prompt based on this example!</small>
+        </div>
+    `;
+}
+
+function submitPrompt() {
+    const userPrompt = document.getElementById('pe-prompt-input').value.trim();
+
+    if (!userPrompt) {
+        alert('Please write a prompt first!');
+        return;
+    }
+
+    const result = Mission3.evaluatePrompt(userPrompt, currentPromptLevel);
+
+    // Show feedback
+    document.getElementById('pe-feedback').style.display = 'block';
+    document.getElementById('pe-input-area').style.display = 'none';
+
+    // Update feedback title
+    if (result.score >= 80) {
+        document.getElementById('pe-feedback-title').textContent = '🎉 Excellent Prompt!';
+    } else if (result.score >= 60) {
+        document.getElementById('pe-feedback-title').textContent = '👍 Good Job!';
+    } else {
+        document.getElementById('pe-feedback-title').textContent = '🤔 Keep Practicing!';
+    }
+
+    // Show score
+    document.getElementById('pe-score-value').textContent = result.score;
+
+    // Show feedback text
+    document.getElementById('pe-feedback-text').innerHTML = result.feedback.map(f => `<p>${f}</p>`).join('');
+
+    // Show matched criteria
+    if (result.matchedCriteria.length > 0) {
+        document.getElementById('pe-matched-criteria').innerHTML = `
+            <div class="pe-criteria-list">
+                <strong>✓ What you included:</strong>
+                <ul>
+                    ${result.matchedCriteria.map(c => `<li>${c}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+
+    // Show appropriate buttons
+    if (result.passed) {
+        document.getElementById('pe-next-btn').style.display = 'inline-block';
+        document.getElementById('pe-retry-btn').style.display = 'none';
+        addPoints(Math.floor(result.score));
+    } else {
+        document.getElementById('pe-next-btn').style.display = 'none';
+        document.getElementById('pe-retry-btn').style.display = 'inline-block';
+        addPoints(Math.floor(result.score / 2));
+    }
+}
+
+function retryPromptLevel() {
+    document.getElementById('pe-feedback').style.display = 'none';
+    document.getElementById('pe-input-area').style.display = 'block';
+}
+
+function nextPromptLevel() {
+    currentPromptLevel++;
+    loadPromptLevel(currentPromptLevel);
 }
 
 function completeGame() {

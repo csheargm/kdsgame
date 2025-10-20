@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Georgia', 'Palatino', serif;
-    background: linear-gradient(135deg, #e8f0e8 0%, #d4e8dc 50%, #c2d9c8 100%);
+    background: linear-gradient(135deg, #3a5a40 0%, #588157 50%, #a3b18a 100%);
     background-attachment: fixed;
     min-height: 100vh;
     padding: 20px;
@@ -26,10 +26,22 @@ body::before {
     right: 0;
     bottom: 0;
     background-image:
-        radial-gradient(circle at 20% 80%, rgba(106, 133, 106, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(82, 109, 82, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(52, 78, 65, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(42, 68, 55, 0.3) 0%, transparent 50%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="20" font-size="20" opacity="0.03">🌿</text><text x="60" y="70" font-size="15" opacity="0.03">🍃</text><text x="30" y="50" font-size="18" opacity="0.03">🌱</text><text x="80" y="40" font-size="16" opacity="0.03">🍂</text></svg>');
+    background-size: 100% 100%, 100% 100%, 300px 300px;
     pointer-events: none;
     z-index: 0;
+    animation: forestBreeze 20s ease-in-out infinite;
+}
+
+@keyframes forestBreeze {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 0.8;
+    }
 }
 
 .container {
@@ -39,18 +51,56 @@ body::before {
     z-index: 1;
 }
 
+.container::before {
+    content: '🌲';
+    position: fixed;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3em;
+    opacity: 0.15;
+    z-index: -1;
+}
+
+.container::after {
+    content: '🌲';
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) scaleX(-1);
+    font-size: 3em;
+    opacity: 0.15;
+    z-index: -1;
+}
+
 header {
-    background: linear-gradient(to bottom, #f9fdf9, #ffffff);
+    background: linear-gradient(to bottom, #dad7cd, #f4f1e8);
     border-radius: 30px;
     padding: 35px;
     margin-bottom: 20px;
     box-shadow:
-        0 8px 32px rgba(61, 90, 69, 0.12),
+        0 8px 32px rgba(42, 68, 55, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.8);
     text-align: center;
-    border: 2px solid rgba(106, 133, 106, 0.15);
+    border: 3px solid rgba(58, 90, 64, 0.4);
     position: relative;
     overflow: hidden;
+}
+
+.header-icon {
+    font-size: 4em;
+    margin-bottom: 10px;
+    animation: squirrelBounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 4px 8px rgba(58, 90, 64, 0.3));
+}
+
+@keyframes squirrelBounce {
+    0%, 100% {
+        transform: translateY(0px) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
 }
 
 header::before {
@@ -58,18 +108,37 @@ header::before {
     position: absolute;
     top: 15px;
     left: 20px;
-    font-size: 2em;
-    opacity: 0.3;
+    font-size: 2.5em;
+    opacity: 0.4;
+    animation: vineGrow 3s ease-in-out infinite;
 }
 
 header::after {
-    content: '🌿';
+    content: '🍃';
     position: absolute;
     bottom: 15px;
     right: 20px;
-    font-size: 2em;
-    opacity: 0.3;
-    transform: rotate(180deg);
+    font-size: 2.5em;
+    opacity: 0.4;
+    animation: leafFloat 4s ease-in-out infinite;
+}
+
+@keyframes vineGrow {
+    0%, 100% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(-5deg);
+    }
+}
+
+@keyframes leafFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(10deg);
+    }
 }
 
 h1 {
@@ -99,15 +168,35 @@ h1 {
 
 .screen {
     display: none;
-    background: linear-gradient(to bottom, #ffffff, #f9fdf9);
+    background: linear-gradient(to bottom, #f4f1e8, #fefae0);
     border-radius: 30px;
     padding: 40px;
     box-shadow:
-        0 8px 32px rgba(61, 90, 69, 0.12),
+        0 8px 32px rgba(42, 68, 55, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    border: 2px solid rgba(106, 133, 106, 0.15);
+    border: 3px solid rgba(88, 129, 87, 0.4);
     animation: fadeIn 0.5s ease-in;
     position: relative;
+}
+
+.screen::before {
+    content: '🌿';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2em;
+    opacity: 0.2;
+    animation: vineGrow 3s ease-in-out infinite;
+}
+
+.screen::after {
+    content: '🍂';
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 2em;
+    opacity: 0.2;
+    animation: leafFloat 4s ease-in-out infinite;
 }
 
 .screen.active {
@@ -128,7 +217,7 @@ h1 {
 /* Welcome Screen */
 .welcome-content {
     text-align: center;
-    max-width: 600px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -167,10 +256,110 @@ h1 {
 }
 
 .learning-goals li::before {
-    content: '🌱';
+    content: '🌰';
     position: absolute;
     left: 0;
     font-size: 1em;
+    animation: acornWiggle 2s ease-in-out infinite;
+}
+
+@keyframes acornWiggle {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
+}
+
+/* Mission Menu */
+.mission-menu {
+    margin: 30px 0;
+}
+
+.mission-menu h3 {
+    color: #2d4d35;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.mission-card {
+    background: linear-gradient(135deg, #fefae0 0%, #f4f1e8 100%);
+    border: 3px solid rgba(88, 129, 87, 0.4);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.mission-card::before {
+    content: '🌱';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    opacity: 0.15;
+}
+
+.mission-card:hover {
+    transform: translateX(8px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(42, 68, 55, 0.3);
+    border-color: rgba(58, 90, 64, 0.6);
+    background: linear-gradient(135deg, #faedcd 0%, #e9edc9 100%);
+}
+
+.mission-card:hover::before {
+    opacity: 0.3;
+    transform: scale(1.2) rotate(15deg);
+}
+
+.mission-icon {
+    font-size: 3em;
+    min-width: 70px;
+    text-align: center;
+}
+
+.mission-info h4 {
+    color: #2d4d35;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.mission-info p {
+    color: #5a6d5a;
+    font-size: 0.95em;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.resources-card {
+    background: linear-gradient(135deg, #fefae0 0%, #faedcd 100%);
+    border-color: rgba(139, 115, 85, 0.4);
+}
+
+.resources-card::before {
+    content: '📚';
+}
+
+.resources-card:hover {
+    background: linear-gradient(135deg, #faedcd 0%, #e9edc9 100%);
+    border-color: rgba(139, 115, 85, 0.6);
+}
+
+.quick-start {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(106, 133, 106, 0.1);
 }
 
 /* Buttons */
@@ -186,17 +375,36 @@ h1 {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #e8ede8 0%, #dce6dc 100%);
-    color: #2d4d35;
-    border: 2px solid rgba(106, 133, 106, 0.25);
+    background: linear-gradient(135deg, #a3b18a 0%, #588157 100%);
+    color: #ffffff;
+    border: 2px solid rgba(52, 78, 65, 0.5);
     font-weight: 600;
     letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '🌿';
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    opacity: 0;
+    transition: all 0.3s ease;
 }
 
 .btn-primary:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(61, 90, 69, 0.25);
-    background: linear-gradient(135deg, #dce6dc 0%, #d0dfd0 100%);
+    box-shadow: 0 6px 20px rgba(42, 68, 55, 0.4);
+    background: linear-gradient(135deg, #588157 0%, #3a5a40 100%);
+    padding-right: 40px;
+}
+
+.btn-primary:hover:not(:disabled)::before {
+    opacity: 1;
+    right: 10px;
 }
 
 .btn-primary:disabled {
@@ -491,28 +699,34 @@ h1 {
 }
 
 .choice-btn::before {
-    content: '🌿';
+    content: '🍃';
     position: absolute;
     left: 10px;
     font-size: 1.2em;
     opacity: 0.5;
+    transition: all 0.3s ease;
 }
 
 .choice-btn:hover {
-    background: linear-gradient(135deg, #f5faf5 0%, #edf5ed 100%);
-    transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(61, 90, 69, 0.15);
+    background: linear-gradient(135deg, #e9edc9 0%, #ccd5ae 100%);
+    transform: translateX(8px);
+    box-shadow: 0 4px 12px rgba(42, 68, 55, 0.25);
+}
+
+.choice-btn:hover::before {
+    transform: rotate(15deg) scale(1.2);
 }
 
 .choice-btn.selected {
-    background: linear-gradient(135deg, #6a9a6e 0%, #5a8a5e 100%);
+    background: linear-gradient(135deg, #588157 0%, #3a5a40 100%);
     color: white;
-    border-color: #5a8a5e;
+    border-color: #3a5a40;
 }
 
 .choice-btn.selected::before {
-    content: '✓';
+    content: '🌰';
     opacity: 1;
+    animation: acornWiggle 1s ease-in-out infinite;
 }
 
 .scenario-feedback {
@@ -595,11 +809,10 @@ h1 {
 }
 
 .achievement-summary li::before {
-    content: '✓';
+    content: '🌳';
     position: absolute;
     left: 0;
-    color: #6a9a6e;
-    font-weight: bold;
+    font-size: 1.2em;
 }
 
 .final-score {
@@ -614,6 +827,195 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 15px;
+}
+
+/* Mission 3: Prompt Engineering Styles */
+.prompt-engineering-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.progress-indicator {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #6b7d8c;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: linear-gradient(135deg, #f0f7f0 0%, #e8f3e8 100%);
+    border-radius: 15px;
+    border: 1.5px solid rgba(106, 133, 106, 0.2);
+}
+
+.pe-level-container {
+    background: linear-gradient(135deg, #f0f7f0 0%, #e8f3e8 100%);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    border: 1.5px solid rgba(106, 133, 106, 0.2);
+    box-shadow: 0 4px 16px rgba(61, 90, 69, 0.08);
+}
+
+.pe-level h3 {
+    color: #2d4d35;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.pe-scenario, .pe-task-box, .pe-bad-example {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.pe-task-box {
+    border-left: 4px solid #6a9a6e;
+    background: linear-gradient(135deg, #f9fdf9 0%, #ffffff 100%);
+}
+
+.pe-bad-example {
+    border-left: 4px solid #c97064;
+    background: linear-gradient(135deg, #fef5f3 0%, #ffffff 100%);
+    font-style: italic;
+}
+
+.pe-example-box {
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8f2 100%);
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    border-left: 4px solid #6a9a6e;
+}
+
+.pe-example-box h4 {
+    color: #2d4d35;
+    margin-bottom: 10px;
+}
+
+.pe-input-area {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    border: 2px solid rgba(106, 133, 106, 0.2);
+    box-shadow: 0 4px 16px rgba(61, 90, 69, 0.08);
+}
+
+.pe-input-area h3 {
+    color: #2d4d35;
+    margin-bottom: 15px;
+}
+
+#pe-prompt-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid rgba(106, 133, 106, 0.3);
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-family: 'Georgia', 'Palatino', serif;
+    margin-bottom: 20px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+#pe-prompt-input:focus {
+    outline: none;
+    border-color: #6a9a6e;
+    box-shadow: 0 0 0 3px rgba(106, 154, 110, 0.1);
+}
+
+.pe-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.hint-box {
+    background: linear-gradient(135deg, #fef9f0 0%, #fcf5e8 100%);
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    border-left: 4px solid #b8956a;
+    box-shadow: 0 4px 16px rgba(184, 149, 106, 0.1);
+}
+
+.hint-box h4 {
+    color: #8a7050;
+    margin-bottom: 10px;
+}
+
+.pe-feedback {
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8f2 100%);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    border: 2px solid rgba(106, 154, 110, 0.3);
+    box-shadow: 0 4px 16px rgba(61, 90, 69, 0.12);
+    text-align: center;
+}
+
+.pe-feedback h4 {
+    color: #2d4d35;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+.pe-score-display {
+    display: inline-block;
+    margin: 20px 0;
+}
+
+.pe-score-value {
+    font-size: 4em;
+    font-weight: bold;
+    color: #6a9a6e;
+    line-height: 1;
+    text-shadow: 2px 2px 4px rgba(106, 154, 110, 0.2);
+}
+
+.pe-score-label {
+    font-size: 1.2em;
+    color: #5a7559;
+    margin-top: 5px;
+}
+
+#pe-feedback-text {
+    text-align: left;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+#pe-feedback-text p {
+    margin-bottom: 10px;
+}
+
+.pe-matched-criteria {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.pe-criteria-list ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.pe-criteria-list li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+}
+
+.pe-criteria-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #6a9a6e;
+    font-weight: bold;
 }
 
 /* Responsive Design */
@@ -720,6 +1122,31 @@ h1 {
         margin: 20px 0;
     }
 
+    /* Mission menu mobile */
+    .mission-card {
+        padding: 15px;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .mission-icon {
+        font-size: 2.5em;
+        min-width: auto;
+    }
+
+    .mission-info {
+        width: 100%;
+    }
+
+    .mission-info h4 {
+        font-size: 1.1em;
+    }
+
+    .mission-info p {
+        font-size: 0.9em;
+    }
+
     /* Make touch targets larger on mobile */
     button {
         min-height: 50px;
@@ -734,6 +1161,27 @@ h1 {
     .confidence-bar-label {
         min-width: 100px;
         font-size: 0.9em;
+    }
+
+    /* Mission 3 mobile styles */
+    .pe-level-container, .pe-input-area, .pe-feedback {
+        padding: 20px;
+    }
+
+    .pe-actions {
+        flex-direction: column;
+    }
+
+    .pe-actions button {
+        width: 100%;
+    }
+
+    #pe-prompt-input {
+        font-size: 1em;
+    }
+
+    .pe-score-value {
+        font-size: 3em;
     }
 }
 
