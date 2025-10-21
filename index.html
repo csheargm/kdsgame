@@ -6,14 +6,14 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>AI Academy - Learn AI & Ethics</title>
+    <title>AI Academy for Kids</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
             <div class="header-icon">🐿️</div>
-            <h1>🌳 AI Academy 🌳</h1>
+            <h1 onclick="goHome()" style="cursor: pointer;" title="Click to return home">🌳 AI Academy for Kids 🌳</h1>
             <p class="subtitle">Gather Knowledge, Grow Wisdom, Nurture the Future! 🌱</p>
             <div class="score-board">
                 <span>🌰 Level: <span id="level">1</span></span>
@@ -174,41 +174,107 @@
                 </div>
             </section>
 
-            <!-- Mission 3: Prompt Engineering Screen -->
+<!-- Mission 3: Prompt Engineering Screen -->
             <section id="prompt-engineering-screen" class="screen">
                 <div class="prompt-engineering-content">
                     <h2>🌾 Mission 3: Harvest Words Wisely</h2>
                     <p class="mission-brief">Learn to craft the perfect messages that get amazing results from AI! Plant seeds of clear communication! 🌻</p>
 
-                    <div class="progress-indicator">
-                        <span id="pe-progress">Level <span id="pe-current">1</span> of <span id="pe-total">5</span></span>
+                    <!-- Learning Overview -->
+                    <div id="pe-learning-overview" style="display: block;">
+                        <div class="learning-goals">
+                            <h3>🌱 What You'll Learn:</h3>
+                            <div class="pe-topics-grid">
+                                <div class="pe-topic-card">
+                                    <h4>🎯 Level 1: Be Specific</h4>
+                                    <p>Learn to tell AI exactly what you want, like giving clear directions to a friend!</p>
+                                </div>
+                                <div class="pe-topic-card">
+                                    <h4>📚 Level 2: Add Context</h4>
+                                    <p>Share what you already know so AI can help you better, just like explaining your homework to a tutor!</p>
+                                </div>
+                                <div class="pe-topic-card">
+                                    <h4>🔄 Level 3: Refine Your Words</h4>
+                                    <p>Learn to improve your prompts, like editing a story to make it better!</p>
+                                </div>
+                                <div class="pe-topic-card">
+                                    <h4>📋 Level 4: Choose Your Format</h4>
+                                    <p>Tell AI how to organize information - bullet points, lists, or paragraphs!</p>
+                                </div>
+                                <div class="pe-topic-card">
+                                    <h4>🌟 Level 5: Master Prompt</h4>
+                                    <p>Combine everything like a pro chef mixing the perfect ingredients!</p>
+                                </div>
+                                <div class="pe-topic-card">
+                                    <h4>🎨 Level 6: Create Characters</h4>
+                                    <p>Help AI create amazing story characters with lots of details!</p>
+                                </div>
+                                <div class="pe-topic-card">
+                                    <h4>🔍 Level 7: Research Helper</h4>
+                                    <p>Use AI to find information for school projects and reports!</p>
+                                </div>
+                                <div class="pe-topic-card">
+                                    <h4>⚽ Level 8: Problem Solver</h4>
+                                    <p>Ask AI to help solve real-life problems like a sports coach!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="pe-scoring-info">
+                                <h4>🏆 How Scoring Works:</h4>
+                                <ul>
+                                    <li>Each level is worth up to 100 points</li>
+                                    <li>You earn points for including specific details in your prompt</li>
+                                    <li>60+ points = You passed the level!</li>
+                                    <li>80+ points = Excellent work!</li>
+                                    <li>Your total score adds up across all levels</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="pe-start-area">
+                                <button class="btn-primary" onclick="startPromptPractice()">🌻 Start Practicing!</button>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="pe-level-container" id="pe-level-container">
-                        <!-- Level content will be loaded dynamically -->
-                    </div>
-
-                    <div class="pe-input-area" id="pe-input-area">
-                        <h3 id="pe-task">Write your prompt here:</h3>
-                        <textarea id="pe-prompt-input" placeholder="Type your prompt here..." rows="4"></textarea>
-
-                        <div class="pe-actions">
-                            <button class="btn-secondary" id="pe-hint-btn" onclick="showPromptHint()">Show Hint</button>
-                            <button class="btn-secondary" id="pe-example-btn" onclick="showPromptExample()">Show Example</button>
-                            <button class="btn-primary" id="pe-submit-btn" onclick="submitPrompt()">Submit Prompt</button>
+                    <!-- Practice Area -->
+                    <div id="pe-practice-area" style="display: none;">
+                        <div class="progress-indicator">
+                            <span id="pe-progress">Level <span id="pe-current">1</span> of <span id="pe-total">8</span></span>
                         </div>
 
-                        <div class="hint-box" id="pe-hint-box" style="display:none;">
-                            <h4>💡 Hint:</h4>
-                            <p id="pe-hint-text"></p>
+                        <div class="pe-level-container" id="pe-level-container">
+                            <!-- Level content will be loaded dynamically -->
+                        </div>
+
+<div class="pe-input-area" id="pe-input-area">
+                            <h3 id="pe-task">Write your prompt here:</h3>
+                            <textarea id="pe-prompt-input" placeholder="Type your prompt here..." rows="4"></textarea>
+
+                            <div class="pe-actions">
+                                <button class="btn-secondary" id="pe-hint-btn" onclick="showPromptHint()">Show Hint</button>
+                                <button class="btn-secondary" id="pe-example-btn" onclick="showPromptExample()">Show Example</button>
+                                <button class="btn-primary" id="pe-submit-btn" onclick="submitPrompt()">Submit Prompt</button>
+                            </div>
+                        </div>
+
+<div class="hint-box" id="pe-hint-box" style="display:none;">
+                                <h4>💡 Hint:</h4>
+                                <p id="pe-hint-text"></p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="pe-feedback" id="pe-feedback" style="display:none;">
+<div class="pe-feedback" id="pe-feedback" style="display:none;">
                         <h4 id="pe-feedback-title"></h4>
-                        <div class="pe-score-display">
-                            <div class="pe-score-value" id="pe-score-value">0</div>
-                            <div class="pe-score-label">Score</div>
+                        <div class="pe-score-container">
+                            <div class="pe-score-display">
+                                <div class="pe-score-value" id="pe-score-value">0</div>
+                                <div class="pe-score-label">This Level</div>
+                            </div>
+                            <div class="pe-total-score-display">
+                                <div class="pe-score-value" id="pe-total-score">0</div>
+                                <div class="pe-score-label">Total Score</div>
+                            </div>
                         </div>
                         <div id="pe-feedback-text"></div>
                         <div class="pe-matched-criteria" id="pe-matched-criteria"></div>

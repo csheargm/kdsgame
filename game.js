@@ -48,6 +48,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+function goHome() {
+    // Stop prediction if running
+    if (predicting) {
+        predicting = false;
+    }
+
+    // Show welcome screen
+    showScreen('welcome-screen');
+}
+
 function startGame() {
     showScreen('training-screen');
     initWebcam();
@@ -759,6 +769,7 @@ function nextScenario() {
 let currentPromptLevel = 0;
 let hintsUsed = 0;
 let exampleShown = false;
+let totalPromptScore = 0;
 
 function goToPromptEngineering() {
     showScreen('prompt-engineering-screen');
@@ -766,8 +777,19 @@ function goToPromptEngineering() {
     currentPromptLevel = 0;
     hintsUsed = 0;
     exampleShown = false;
-    loadPromptLevel(0);
+    totalPromptScore = 0;
+    
+    // Show learning overview first
+    document.getElementById('pe-learning-overview').style.display = 'block';
+    document.getElementById('pe-practice-area').style.display = 'none';
+    
     addPoints(50); // Bonus for completing ethics challenges
+}
+
+function startPromptPractice() {
+    document.getElementById('pe-learning-overview').style.display = 'none';
+    document.getElementById('pe-practice-area').style.display = 'block';
+    loadPromptLevel(0);
 }
 
 function loadPromptLevel(levelIndex) {
@@ -875,8 +897,12 @@ function submitPrompt() {
         document.getElementById('pe-feedback-title').textContent = '🤔 Keep Practicing!';
     }
 
-    // Show score
+// Show score
     document.getElementById('pe-score-value').textContent = result.score;
+    
+    // Update and show total score
+    totalPromptScore += result.score;
+    document.getElementById('pe-total-score').textContent = totalPromptScore;
 
     // Show feedback text
     document.getElementById('pe-feedback-text').innerHTML = result.feedback.map(f => `<p>${f}</p>`).join('');

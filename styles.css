@@ -148,6 +148,12 @@ h1 {
     font-weight: 600;
     letter-spacing: 0.5px;
     text-shadow: 2px 2px 4px rgba(106, 133, 106, 0.1);
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+h1:hover {
+    color: #4a7555;
+    transform: scale(1.02);
 }
 
 .subtitle {
@@ -962,9 +968,17 @@ h1 {
     margin-bottom: 20px;
 }
 
-.pe-score-display {
-    display: inline-block;
+.pe-score-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
     margin: 20px 0;
+}
+
+.pe-score-display, .pe-total-score-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .pe-score-value {
@@ -1016,6 +1030,84 @@ h1 {
     left: 0;
     color: #6a9a6e;
     font-weight: bold;
+}
+
+/* Mission 3 Learning Overview */
+.pe-topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.pe-topic-card {
+    background: linear-gradient(135deg, #f5faf5 0%, #edf5ed 100%);
+    border: 2px solid rgba(106, 133, 106, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(61, 90, 69, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pe-topic-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(61, 90, 69, 0.15);
+}
+
+.pe-topic-card h4 {
+    color: #2d4d35;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.pe-topic-card p {
+    color: #5a6d5a;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.pe-scoring-info {
+    background: linear-gradient(135deg, #fef9f0 0%, #fcf5e8 100%);
+    border-left: 5px solid #b8956a;
+    padding: 25px;
+    border-radius: 15px;
+    margin: 30px 0;
+    box-shadow: 0 4px 16px rgba(184, 149, 106, 0.1);
+}
+
+.pe-scoring-info h4 {
+    color: #8a7050;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.pe-scoring-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.pe-scoring-info li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+    color: #5a6d5a;
+}
+
+.pe-scoring-info li::before {
+    content: '🏆';
+    position: absolute;
+    left: 0;
+}
+
+.pe-start-area {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.pe-start-area .btn-primary {
+    font-size: 1.3em;
+    padding: 15px 30px;
 }
 
 /* Responsive Design */
